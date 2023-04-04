@@ -8,20 +8,18 @@ import { useState } from 'react';
 import { useFormControl } from '@mui/material/FormControl';
 import DeleteIcon from '@mui/icons-material/Delete';
 function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [form, setForm] = useState({});
 
   //initialize it with array so that we can store all the input value
   const [data, setData] = useState([])
 
   function addData() {
     // ...data is used to retrieve the previous data entered otherwise previous data will be rewritten
-    if (name !== "" && email !== "") {
-      setData([...data, { name, email }]);
+    if (form.name !== "" && form.email !== "") {
+      setData([...data, form]);
       alert("Data Successfully added")
     }
-    setName("");
-    setEmail("");
+    setForm(form);
   }
     function deleteItem(index) {
     let arr = data;
@@ -36,8 +34,8 @@ function App() {
         <Stack direction="row" spacing={2}>
           <TextField
           required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={form.name}
+            onChange={(e) => setForm({...form,name:e.target.value})}
             id="outlined-basic"
             label="Name"
             variant="outlined"
@@ -45,8 +43,8 @@ function App() {
           />
           <TextField  
             required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={form.email}
+            onChange={(e) => setForm({...form,email:e.target.value})}
             id="outlined-basic"
             label="EmailID"
             variant="outlined"
