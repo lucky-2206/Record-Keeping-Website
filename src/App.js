@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
+import { useFormControl } from '@mui/material/FormControl';
 import DeleteIcon from '@mui/icons-material/Delete';
 function App() {
   const [name, setName] = useState("");
@@ -15,12 +16,14 @@ function App() {
 
   function addData() {
     // ...data is used to retrieve the previous data entered otherwise previous data will be rewritten
-    setData([...data, { name, email }]);
+    if (name !== "" && email !== "") {
+      setData([...data, { name, email }]);
+      alert("Data Successfully added")
+    }
     setName("");
     setEmail("");
   }
-
-  function deleteItem(index) {
+    function deleteItem(index) {
     let arr = data;
     arr.splice(index, 1);
     setData([...arr]);
@@ -32,13 +35,16 @@ function App() {
       <div className='form'>
         <Stack direction="row" spacing={2}>
           <TextField
+          required
             value={name}
             onChange={(e) => setName(e.target.value)}
             id="outlined-basic"
             label="Name"
             variant="outlined"
+            type='email'
           />
-          <TextField
+          <TextField  
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             id="outlined-basic"
