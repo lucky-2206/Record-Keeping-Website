@@ -26,6 +26,12 @@ function App() {
     arr.splice(index, 1);
     setData([...arr]);
   }
+  function handlepress(event)
+  {
+    if(event.key=='Enter')
+      addData();
+    console.log(event.key);
+  }
   return (
     <div className="App">
       {/* Form */}
@@ -33,7 +39,7 @@ function App() {
       <div className='form'>
         <Stack direction="row" spacing={2}>
           <TextField
-          required
+            onKeyPress={(e)=>handlepress(e)}
             value={form.name}
             onChange={(e) => setForm({...form,name:e.target.value})}
             id="outlined-basic"
@@ -42,8 +48,8 @@ function App() {
             type='email'
           />
           <TextField  
-            required
             value={form.email}
+            onKeyPress={(e)=>handlepress(e)}
             onChange={(e) => setForm({...form,email:e.target.value})}
             id="outlined-basic"
             label="EmailID"
